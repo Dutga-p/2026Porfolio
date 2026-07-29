@@ -1,0 +1,13 @@
+{
+  "role": "Auxiliar de Sistemas",
+  "organization": "Tecnacon",
+  "startDate": "09/2024",
+  "endDate": "05/2025",
+  "achievements": [
+    "Desarrollé y mantuve aplicaciones web internas con React, además de elaborar documentación técnica e instructivos de procedimientos.",
+    "Brindé soporte técnico y mantenimiento preventivo/correctivo a equipos de cómputo, reduciendo la recurrencia de incidentes mediante soporte proactivo.",
+    "Instalé y configuré software especializado de control de accesos (biométricos y tarjetas) y supervisé sistemas de videovigilancia con cámaras PoE.",
+    "Administré cuentas de correo corporativo: configuración, soporte y gestión de usuarios."
+  ],
+  "order": 3
+}

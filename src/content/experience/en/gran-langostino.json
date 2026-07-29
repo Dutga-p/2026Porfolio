@@ -1,0 +1,11 @@
+{
+  "role": "Automation Developer — Data Processing",
+  "organization": "El Gran Langostino S.A",
+  "startDate": "06/2025",
+  "endDate": "08/2025",
+  "achievements": [
+    "Built bots with Python and Selenium to automate portal navigation, captcha solving, and downloading and extracting data from electronic PDF invoices, processing 14,000 documents in 2 months that were previously entered by hand.",
+    "Integrated the extracted data with Excel for automatic accounting report generation, with data validation and error control that cut inconsistencies by 99%."
+  ],
+  "order": 2
+}

@@ -1,0 +1,33 @@
+---
+import { getCollection } from 'astro:content';
+import Container from '../ui/Container.astro';
+import SectionHeading from '../ui/SectionHeading.astro';
+import TestimonialCard from '../ui/TestimonialCard.astro';
+import type { Lang } from '../../i18n/ui';
+import { useTranslations } from '../../i18n/utils';
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = 'es' } = Astro.props;
+const t = useTranslations(lang);
+
+const testimonials = (
+  await getCollection('testimonials', ({ id }) => id.startsWith(`${lang}/`))
+).sort((a, b) => a.data.order - b.data.order);
+---
+
+<section id="testimonials" class="py-24">
+  <Container class="flex flex-col gap-12">
+    <SectionHeading
+      eyebrow={t.testimonials.eyebrow}
+      title={t.testimonials.title}
+      description={t.testimonials.description}
+    />
+
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+      {testimonials.map((testimonial) => <TestimonialCard {...testimonial.data} />)}
+    </div>
+  </Container>
+</section>

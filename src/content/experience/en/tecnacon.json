@@ -1,0 +1,13 @@
+{
+  "role": "Systems Assistant",
+  "organization": "Tecnacon",
+  "startDate": "09/2024",
+  "endDate": "05/2025",
+  "achievements": [
+    "Built and maintained internal web applications with React, and wrote technical documentation and procedure guides.",
+    "Provided technical support and preventive/corrective maintenance for computer equipment, reducing recurring incidents through proactive support.",
+    "Installed and configured specialized access control software (biometric and card-based) and oversaw video surveillance systems with PoE cameras.",
+    "Managed corporate email accounts: setup, support, and user administration."
+  ],
+  "order": 3
+}

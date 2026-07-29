@@ -1,0 +1,9 @@
+{
+  "title": "Red Real Estate Digital — Corporate Real Estate Portal",
+  "description": "Corporate real estate portal developed for Red Real Estate Digital. I integrated the frontend with internal APIs hosted on AWS to consult properties, housing projects, and real estate agents in real time. The application was optimized for SEO, performance, accessibility, best practices, and AI agentic navigation.",
+  "technologies": ["Next.js", "React", "TypeScript", "Tailwind CSS", "REST API", "AWS"],
+  "image": "../../../assets/projects/red-real-estate.webp",
+  "demoUrl": "https://redfincaraiz.com/",
+  "category": "client",
+  "order": 1
+}

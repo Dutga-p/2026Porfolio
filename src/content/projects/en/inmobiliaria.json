@@ -1,0 +1,9 @@
+{
+  "title": "Real Estate Catalog — Soluciones Integrales",
+  "description": "Web catalog designed, developed, and deployed from scratch for a real estate agency in Cali. The client publishes and manages its properties without depending on a technician.",
+  "technologies": ["Vue.js", "TypeScript", "Tailwind CSS"],
+  "image": "../../../assets/projects/inmobiliaria.webp",
+  "demoUrl": "https://www.inmobiliariasolucionesintegrales.inmob.site/",
+  "category": "client",
+  "order": 4
+}

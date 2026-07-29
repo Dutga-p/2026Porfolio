@@ -1,0 +1,120 @@
+@import "tailwindcss";
+@import "@fontsource-variable/space-grotesk";
+@import "@fontsource-variable/inter";
+
+/*
+  Design tokens — "Editorial Dark".
+  Dark mode is the default/primary experience; light mode is an
+  explicit opt-in via [data-theme="light"] on <html>, toggled at runtime.
+*/
+:root {
+  --bg: #0b0b0d;
+  --surface: #151517;
+  --surface-hover: #1c1c1f;
+  --border: #27272a;
+  --text-primary: #ededef;
+  --text-secondary: #9a9aa2;
+  --text-muted: #8f8f96;
+  --accent: #b8965a;
+  --accent-hover: #c9a876;
+  --accent-foreground: #0b0b0d;
+}
+
+:root[data-theme="light"] {
+  --bg: #fafaf9;
+  --surface: #ffffff;
+  --surface-hover: #f4f4f5;
+  --border: #e4e4e7;
+  --text-primary: #18181b;
+  --text-secondary: #52525b;
+  --text-muted: #71717a;
+  --accent: #96793f;
+  --accent-hover: #7e6534;
+  --accent-foreground: #ffffff;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
+  --color-border: var(--border);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --font-display: "Space Grotesk Variable", sans-serif;
+  --font-sans: "Inter Variable", sans-serif;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    color-scheme: dark;
+    scroll-behavior: smooth;
+  }
+
+  html[data-theme="light"] {
+    color-scheme: light;
+  }
+
+  [data-theme="dark"] .icon-sun {
+    display: none;
+  }
+
+  [data-theme="light"] .icon-moon {
+    display: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text-primary);
+    font-family: var(--font-sans);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+}
+
+@layer utilities {
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-up {
+    animation: fade-up 0.6s ease-out both;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-fade-up {
+      animation: none;
+    }
+  }
+}

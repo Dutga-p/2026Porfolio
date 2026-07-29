@@ -1,0 +1,14 @@
+{
+  "role": "Desarrollador de Software",
+  "organization": "Red Real Estate Digital",
+  "startDate": "11/2025",
+  "achievements": [
+    "Diseñé y desarrollé bots en Python para la extracción, validación y carga automática de leads inmobiliarios desde portales como Fincaraíz, Metrocuadrado y Ciencuadras hacia el CRM de la empresa, reduciendo el tiempo de procesamiento de 9 horas a 5 minutos diarios.",
+    "Automaticé la generación diaria de reportes en Excel con lotes numerados de leads mediante scripts programados (cron), garantizando la disponibilidad de datos completos del día anterior sin intervención manual.",
+    "Desarrollé bots de navegación web (web scraping) para análisis comparativo de mercado inmobiliario, incluyendo estrategias de extracción multi-fuente y manejo de protecciones anti-bot.",
+    "Construí templates, vistas y endpoints para el CRM corporativo utilizando React, Vue, Node.js y Laravel, mejorando la experiencia de los asesores comerciales.",
+    "Desarrollé una aplicación móvil multiplataforma con React Native y TypeScript, gestionando el ciclo completo de build y firma con Expo/EAS.",
+    "Administré infraestructura en AWS y Hostinger: despliegue de APIs Flask con Gunicorn, contenedores Docker, Nginx como proxy inverso y gestión de certificados SSL."
+  ],
+  "order": 1
+}

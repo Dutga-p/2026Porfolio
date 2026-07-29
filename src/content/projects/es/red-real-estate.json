@@ -1,0 +1,9 @@
+{
+  "title": "Red Real Estate Digital — Portal Inmobiliario Corporativo",
+  "description": "Portal inmobiliario corporativo desarrollado para Red Real Estate Digital. Integré el frontend con APIs internas alojadas en AWS para consultar propiedades, proyectos de vivienda y agentes inmobiliarios en tiempo real. La aplicación fue optimizada para SEO, Performance, Accesibilidad, Buenas Prácticas y navegación agéntica de IA.",
+  "technologies": ["Next.js", "React", "TypeScript", "Tailwind CSS", "REST API", "AWS"],
+  "image": "../../../assets/projects/red-real-estate.webp",
+  "demoUrl": "https://redfincaraiz.com/",
+  "category": "client",
+  "order": 1
+}

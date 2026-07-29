@@ -1,0 +1,31 @@
+---
+interface Props {
+  href?: string;
+  type?: 'button' | 'submit' | 'reset';
+  variant?: 'primary' | 'secondary';
+  class?: string;
+  download?: boolean;
+}
+
+const { href, type = 'button', variant = 'primary', class: className, download } = Astro.props;
+
+const classes = [
+  'inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-medium transition-colors',
+  variant === 'primary'
+    ? 'bg-accent text-accent-foreground hover:bg-accent-hover'
+    : 'border border-border text-text-primary hover:bg-surface',
+  className,
+];
+---
+
+{
+  href ? (
+    <a href={href} class:list={classes} download={download}>
+      <slot />
+    </a>
+  ) : (
+    <button type={type} class:list={classes}>
+      <slot />
+    </button>
+  )
+}

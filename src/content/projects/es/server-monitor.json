@@ -1,0 +1,9 @@
+{
+  "title": "Server Monitor — Dashboard de Monitoreo de Infraestructura",
+  "description": "Herramienta propia de monitoreo de infraestructura utilizada en un VPS de una empresa real. Supervisa en tiempo real tres servicios críticos, registrando disponibilidad (uptime), consumo de CPU, memoria y almacenamiento, además de mantener un historial de métricas de las últimas 24 horas y generar alertas automáticas ante incidencias.",
+  "technologies": ["Python", "Flask", "SQLite", "Chart.js"],
+  "image": "../../../assets/projects/server-monitor.webp",
+  "demoUrl": "https://monitor.dcom.agency:445",
+  "category": "own",
+  "order": 3
+}

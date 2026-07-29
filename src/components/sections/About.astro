@@ -1,0 +1,53 @@
+---
+import { Image } from 'astro:assets';
+import Container from '../ui/Container.astro';
+import SectionHeading from '../ui/SectionHeading.astro';
+import Button from '../ui/Button.astro';
+import photo from '../../assets/me.webp';
+import type { Lang } from '../../i18n/ui';
+import { useTranslations } from '../../i18n/utils';
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = 'es' } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<section id="about" class="py-24">
+  <Container class="grid gap-12 lg:grid-cols-[320px_1fr] lg:items-center">
+    <div class="relative mx-auto w-full max-w-xs">
+      <div class="absolute -inset-4 -z-10 rounded-3xl bg-accent/10 blur-2xl" aria-hidden="true"></div>
+      <Image
+        src={photo}
+        alt="David"
+        width={480}
+        height={480}
+        class="aspect-square w-full rounded-2xl border border-border object-cover"
+      />
+    </div>
+
+    <div class="flex flex-col gap-6">
+      <SectionHeading eyebrow={t.about.eyebrow} title={t.about.title} />
+
+      <p class="text-text-secondary">{t.about.p1}</p>
+      <p class="text-text-secondary">{t.about.p2}</p>
+
+      <ul class="grid gap-3 sm:grid-cols-2">
+        {
+          t.about.highlights.map((highlight) => (
+            <li class="flex items-start gap-2 text-sm text-text-secondary">
+              <span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+              {highlight}
+            </li>
+          ))
+        }
+      </ul>
+
+      <Button href="#projects" variant="secondary" class="w-fit">
+        {t.about.cta}
+      </Button>
+    </div>
+  </Container>
+</section>

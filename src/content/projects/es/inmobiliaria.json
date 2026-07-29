@@ -1,0 +1,9 @@
+{
+  "title": "Catálogo Inmobiliario — Soluciones Integrales",
+  "description": "Catálogo web diseñado, desarrollado y desplegado desde cero para una inmobiliaria en Cali. El cliente publica y administra sus propiedades sin depender de un técnico.",
+  "technologies": ["Vue.js", "TypeScript", "Tailwind CSS"],
+  "image": "../../../assets/projects/inmobiliaria.webp",
+  "demoUrl": "https://www.inmobiliariasolucionesintegrales.inmob.site/",
+  "category": "client",
+  "order": 4
+}

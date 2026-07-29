@@ -1,0 +1,11 @@
+{
+  "role": "Desarrollador de Automatización — Procesamiento de Datos",
+  "organization": "El Gran Langostino S.A",
+  "startDate": "06/2025",
+  "endDate": "08/2025",
+  "achievements": [
+    "Desarrollé bots con Python y Selenium para automatizar la navegación a portales, la resolución de captchas, y la descarga y extracción de datos de facturas electrónicas en PDF, procesando 14.000 documentos en 2 meses que antes se digitaban manualmente.",
+    "Integré los datos extraídos con Excel para la generación automática de reportes contables, con validación de datos y control de errores que redujo las inconsistencias en 99%."
+  ],
+  "order": 2
+}

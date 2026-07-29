@@ -1,0 +1,57 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  project: CollectionEntry<'projects'>['data'];
+  categoryLabel: string;
+  viewProjectLabel: string;
+}
+
+const { project, categoryLabel, viewProjectLabel } = Astro.props;
+---
+
+<article
+  class="group flex flex-col overflow-hidden rounded-2xl border border-border bg-surface transition-colors hover:border-accent/60"
+>
+  <a href={project.demoUrl} target="_blank" rel="noopener noreferrer" class="block overflow-hidden">
+    <Image
+      src={project.image}
+      alt={project.title}
+      width={640}
+      height={400}
+      class="aspect-16/10 w-full object-cover transition-transform duration-500 group-hover:scale-105"
+    />
+  </a>
+
+  <div class="flex flex-1 flex-col gap-3 p-6">
+    <span class="w-fit rounded-full border border-border px-3 py-1 text-xs text-text-muted">
+      {categoryLabel}
+    </span>
+
+    <h3 class="font-display text-lg font-semibold text-text-primary">
+      {project.title}
+    </h3>
+
+    <p class="flex-1 text-sm text-text-secondary">
+      {project.description}
+    </p>
+
+    <ul class="flex flex-wrap gap-2">
+      {
+        project.technologies.map((tech) => (
+          <li class="rounded-full bg-bg px-2.5 py-1 text-xs text-text-muted">{tech}</li>
+        ))
+      }
+    </ul>
+
+    <a
+      href={project.demoUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="mt-2 inline-flex items-center gap-1 text-sm font-medium text-accent transition-colors hover:text-accent-hover"
+    >
+      {viewProjectLabel}
+    </a>
+  </div>
+</article>

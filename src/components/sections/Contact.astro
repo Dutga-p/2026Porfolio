@@ -1,0 +1,164 @@
+---
+import Container from '../ui/Container.astro';
+import SectionHeading from '../ui/SectionHeading.astro';
+import Button from '../ui/Button.astro';
+import type { Lang } from '../../i18n/ui';
+import { useTranslations } from '../../i18n/utils';
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = 'es' } = Astro.props;
+const t = useTranslations(lang);
+
+const whatsappNumber = '573183150525';
+const email = 'contacto@dcom.agency';
+
+const links = [
+  { label: email, sublabel: 'Email', href: `mailto:${email}` },
+  {
+    label: 'LinkedIn',
+    sublabel: 'LinkedIn',
+    href: 'https://www.linkedin.com/in/david-ord%C3%B3%C3%B1ez-mar%C3%ADn-26a504256/',
+  },
+  {
+    label: '+57 318 315 0525',
+    sublabel: 'WhatsApp',
+    href: `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(t.contact.whatsappMessage)}`,
+  },
+  { label: 'github.com/Dutga-p', sublabel: 'GitHub', href: 'https://github.com/Dutga-p' },
+];
+
+const errors = t.contact.form.errors;
+const prefillTemplate = t.contact.form.prefillTemplate;
+---
+
+<section id="contact" class="py-24">
+  <Container class="grid gap-12 lg:grid-cols-2">
+    <div class="flex flex-col gap-8">
+      <SectionHeading
+        eyebrow={t.contact.eyebrow}
+        title={t.contact.title}
+        description={t.contact.description}
+      />
+
+      <ul class="flex flex-col gap-4">
+        {
+          links.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="group flex items-center justify-between rounded-xl border border-border bg-surface px-5 py-4 transition-colors hover:border-accent/60"
+              >
+                <span>
+                  <span class="block text-xs text-text-muted">{link.sublabel}</span>
+                  <span class="block text-sm font-medium text-text-primary">{link.label}</span>
+                </span>
+                <span class="text-text-muted transition-colors group-hover:text-accent">→</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <form
+      id="contact-form"
+      novalidate
+      data-whatsapp-number={whatsappNumber}
+      data-prefill-template={prefillTemplate}
+      class="flex flex-col gap-4"
+    >
+      <div class="flex flex-col gap-1.5">
+        <label for="name" class="text-sm text-text-secondary">{t.contact.form.name}</label>
+        <input
+          id="name"
+          name="name"
+          type="text"
+          autocomplete="name"
+          class="rounded-lg border border-border bg-surface px-4 py-2.5 text-sm text-text-primary outline-none transition-colors focus:border-accent"
+        />
+        <p class="hidden text-xs text-red-400" data-error-for="name">
+          {errors.name}
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-1.5">
+        <label for="email" class="text-sm text-text-secondary">{t.contact.form.email}</label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          autocomplete="email"
+          class="rounded-lg border border-border bg-surface px-4 py-2.5 text-sm text-text-primary outline-none transition-colors focus:border-accent"
+        />
+        <p class="hidden text-xs text-red-400" data-error-for="email">
+          {errors.email}
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-1.5">
+        <label for="message" class="text-sm text-text-secondary">{t.contact.form.message}</label>
+        <textarea
+          id="message"
+          name="message"
+          rows="4"
+          class="resize-none rounded-lg border border-border bg-surface px-4 py-2.5 text-sm text-text-primary outline-none transition-colors focus:border-accent"
+        ></textarea>
+        <p class="hidden text-xs text-red-400" data-error-for="message">
+          {errors.message}
+        </p>
+      </div>
+
+      <Button type="submit" variant="primary" class="mt-2">
+        {t.contact.form.submit}
+      </Button>
+
+      <p class="text-xs text-text-muted">
+        {t.contact.form.disclaimer}
+      </p>
+    </form>
+  </Container>
+</section>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  const setError = (field: string, show: boolean) => {
+    form?.querySelector(`[data-error-for="${field}"]`)?.classList.toggle('hidden', !show);
+  };
+
+  form?.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    const whatsappNumber = form.dataset.whatsappNumber ?? '';
+    const prefillTemplate = form.dataset.prefillTemplate ?? '{name} {email} {message}';
+
+    const data = new FormData(form);
+    const name = String(data.get('name') ?? '').trim();
+    const email = String(data.get('email') ?? '').trim();
+    const message = String(data.get('message') ?? '').trim();
+
+    const nameValid = name.length > 0;
+    const emailValid = emailPattern.test(email);
+    const messageValid = message.length > 0;
+
+    setError('name', !nameValid);
+    setError('email', !emailValid);
+    setError('message', !messageValid);
+
+    if (!nameValid || !emailValid || !messageValid) return;
+
+    const text = prefillTemplate
+      .replace('{name}', name)
+      .replace('{email}', email)
+      .replace('{message}', message);
+    const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
+    window.open(url, '_blank', 'noopener,noreferrer');
+    form.reset();
+  });
+</script>

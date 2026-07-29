@@ -1,0 +1,9 @@
+{
+  "title": "LogiCore Solutions — Sistema de Gestión Logística",
+  "description": "Demo interactiva de una plataforma SaaS completa para distribución y logística: dashboard ejecutivo, inventario multi-bodega, ventas, compras y flota de vehículos con seguimiento en tiempo real.",
+  "technologies": ["React", "React Router", "Motion", "Tailwind CSS"],
+  "image": "../../../assets/projects/logicore.webp",
+  "demoUrl": "https://github.com/Dutga-p/2025-Porfolio",
+  "category": "demo",
+  "order": 5
+}

@@ -1,0 +1,9 @@
+{
+  "title": "Mantenimiento y Mejora — Emporio Bienes & Capitales",
+  "description": "Sistema de inventario inmobiliario utilizado por usuarios reales en Cali y Medellín. Gestiona propiedades, usuarios con diferentes roles, imágenes, videos y observaciones. He liderado su mantenimiento evolutivo, optimización de rendimiento y desarrollo de nuevas funcionalidades, manteniéndolo operativo de forma continua en un VPS con Docker, Laravel, Vue.js y PostgreSQL.",
+  "technologies": ["Laravel", "Vue.js", "Tailwind CSS", "PostgreSQL", "Docker"],
+  "image": "../../../assets/projects/emporio.webp",
+  "demoUrl": "https://emporiobienessas.com/",
+  "category": "client",
+  "order": 2
+}

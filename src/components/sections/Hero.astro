@@ -1,0 +1,76 @@
+---
+import Container from '../ui/Container.astro';
+import Button from '../ui/Button.astro';
+import type { Lang } from '../../i18n/ui';
+import { useTranslations } from '../../i18n/utils';
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = 'es' } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<section id="home" class="hero relative overflow-hidden">
+  <Container class="flex min-h-[85vh] flex-col justify-center gap-6 py-20">
+    <p
+      class="hero-badge inline-flex w-fit items-center gap-2 rounded-full border border-border bg-surface px-4 py-1.5 text-xs text-text-secondary"
+    >
+      <span class="hero-badge-dot h-1.5 w-1.5 rounded-full bg-accent"></span>
+      {t.hero.availability}
+    </p>
+
+    <h1
+      class="hero-title max-w-3xl font-display text-4xl leading-tight font-semibold text-text-primary sm:text-6xl lg:text-7xl"
+    >
+      {t.hero.titlePrefix}{' '}
+      <span class="text-text-secondary">{t.hero.titleSuffix}</span>
+    </h1>
+
+    <p class="hero-description max-w-xl text-lg text-text-secondary">
+      {t.hero.description}
+    </p>
+
+    <div class="hero-ctas flex flex-wrap gap-4">
+      <Button href="#projects" variant="primary">{t.hero.ctaProjects}</Button>
+      <Button href="/CV/CV_David_Ordonez_2026.pdf" variant="secondary" download>
+        {t.hero.ctaCV}
+      </Button>
+      <Button href="#contact" variant="secondary">{t.hero.ctaContact}</Button>
+    </div>
+  </Container>
+</section>
+
+<script>
+  import { gsap } from 'gsap';
+
+  const hero = document.querySelector('.hero');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (hero && !reduceMotion) {
+    // Entrance is JS-driven (gsap.from), not CSS: the markup renders fully
+    // visible by default, so a visitor without JS still sees everything —
+    // GSAP only sets the "from" state once it's actually running.
+    const ctas = hero.querySelectorAll('.hero-ctas > *');
+
+    gsap
+      .timeline({ defaults: { ease: 'power3.out', duration: 0.7 } })
+      .from('.hero-badge', { autoAlpha: 0, y: 10 })
+      .from('.hero-title', { autoAlpha: 0, y: 20 }, '-=0.5')
+      .from('.hero-description', { autoAlpha: 0, y: 14 }, '-=0.45')
+      .from(ctas, { autoAlpha: 0, y: 12, stagger: 0.08 }, '-=0.4');
+
+    // Subtle looping pulse on the availability dot — small, purposeful,
+    // and paused entirely under reduced motion rather than just skipped once.
+    gsap.to('.hero-badge-dot', {
+      scale: 1.6,
+      opacity: 0.4,
+      duration: 1.1,
+      repeat: -1,
+      yoyo: true,
+      ease: 'sine.inOut',
+      delay: 1.2,
+    });
+  }
+</script>
