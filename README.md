@@ -121,7 +121,7 @@ Open Graph, Twitter Cards, JSON-LD de tipo `Person` y sitemap (`@astrojs/sitemap
 
 Build estático (`pnpm build` → `dist/`) desplegado en Vercel. [vercel.json](vercel.json) añade CSP, `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy` y cacheo largo e inmutable para `/_astro/` y las imágenes.
 
-> ⚠️ El `script-src` del CSP autoriza los scripts inline por **hash sha256**. Si editas el script de tema o el JSON-LD de `BaseLayout.astro`, el navegador los bloqueará en producción hasta que regeneres el hash correspondiente en `vercel.json`. La consola del navegador imprime el hash esperado en el mensaje de bloqueo.
+>  El `script-src` del CSP autoriza los scripts inline por **hash sha256**. Si editas el script de tema o el JSON-LD de `BaseLayout.astro`, el navegador los bloqueará en producción hasta que regeneres el hash correspondiente en `vercel.json`. La consola del navegador imprime el hash esperado en el mensaje de bloqueo.
 
 ## Licencia
 
