@@ -2,7 +2,7 @@
 
 Sitio personal y portafolio profesional. Estático, bilingüe (ES/EN) y sin JavaScript de framework en el cliente.
 
-**En producción:** [dcom.agency](https://dcom.agency) · **Repo:** [Dutga-p/2026Porfolio](https://github.com/Dutga-p/2026Porfolio)
+**En producción:** [dcom.agency](https://portfolio.dcom.agency) · **Repo:** [Dutga-p/2026Porfolio](https://github.com/Dutga-p/2026Porfolio)
 
 ## Stack
 
