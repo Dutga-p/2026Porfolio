@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import { languages, type Lang } from '../i18n/ui';
 import { getLocalizedPath } from '../i18n/utils';
+import { personSchemaJson, themeScript } from '../lib/head-inline.js';
 
 interface Props {
   title: string;
@@ -13,31 +14,6 @@ const { title, description, lang = 'es' } = Astro.props;
 
 const canonicalURL = new URL(getLocalizedPath(lang), Astro.site);
 const ogImageURL = new URL('/og-image.webp', Astro.site);
-
-const personSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'Person',
-  name: 'David Ordóñez Marín',
-  jobTitle: 'Full Stack Software Developer',
-  knowsAbout: [
-    'Python',
-    'Web Scraping',
-    'Process Automation',
-    'React',
-    'React Native',
-    'Vue.js',
-    'Node.js',
-    'Laravel',
-    'AWS',
-    'Docker',
-  ],
-  url: Astro.site?.toString(),
-  image: ogImageURL.toString(),
-  sameAs: [
-    'https://github.com/Dutga-p',
-    'https://www.linkedin.com/in/david-ord%C3%B3%C3%B1ez-mar%C3%ADn-26a504256/',
-  ],
-};
 ---
 
 <!doctype html>
@@ -74,14 +50,10 @@ const personSchema = {
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageURL} />
 
-    <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
-
-    <script is:inline>
-      // Runs before paint to avoid a flash of the wrong theme.
-      const stored = localStorage.getItem('theme');
-      const theme = stored === 'light' || stored === 'dark' ? stored : 'dark';
-      document.documentElement.dataset.theme = theme;
-    </script>
+    {/* Ambos scripts salen de src/lib/head-inline.js, que es también de donde
+        astro.config.mjs saca sus hashes CSP. No los escribas aquí a mano. */}
+    <script type="application/ld+json" is:inline set:html={personSchemaJson} />
+    <script is:inline set:html={themeScript} />
   </head>
   <body>
     <a

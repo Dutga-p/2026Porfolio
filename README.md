@@ -13,6 +13,7 @@ Sitio personal y portafolio profesional. Estático, bilingüe (ES/EN) y sin Java
 | Contenido  | Content Collections con esquemas Zod (JSON en `src/content/`)                  |
 | Tipografía | Space Grotesk (display) + Inter (texto), self-hosted con Fontsource            |
 | Iconos     | `simple-icons` (SVG inline, sin peticiones externas)                           |
+| Imágenes   | `<Image>` de `astro:assets` con `sharp` (dependencia directa, ver más abajo)   |
 | Calidad    | ESLint 10 + `eslint-plugin-astro`, Vitest, TypeScript                          |
 | Deploy     | Vercel (estático + cabeceras de seguridad en `vercel.json`)                    |
 
@@ -57,6 +58,8 @@ src/
 ├── i18n/
 │   ├── ui.ts                # todas las cadenas de interfaz (ES/EN)
 │   └── utils.ts             # helpers de idioma y rutas
+├── lib/
+│   └── head-inline.js       # scripts inline del <head> + su fuente de hash CSP
 ├── layouts/
 │   ├── BaseLayout.astro     # <head>, SEO, JSON-LD, tema anti-flash
 │   └── PageLayout.astro     # BaseLayout + Navbar + Footer
@@ -67,6 +70,8 @@ src/
 ```
 
 Las imágenes de proyectos viven en `src/assets/` (las optimiza Astro); el CV, favicons y la imagen OG en `public/` (se sirven tal cual).
+
+> `sharp` está declarado como **dependencia directa** a propósito. Astro solo lo trae como dependencia opcional, y pnpm la omitía en el build de Vercel: el resultado eran avisos `MissingSharp` y un `Error generating image` que tumbaba el deploy. No la muevas a opcional ni la quites mientras se use `<Image>`.
 
 ## Contenido
 
@@ -119,9 +124,15 @@ Open Graph, Twitter Cards, JSON-LD de tipo `Person` y sitemap (`@astrojs/sitemap
 
 ## Despliegue
 
-Build estático (`pnpm build` → `dist/`) desplegado en Vercel. [vercel.json](vercel.json) añade CSP, `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy` y cacheo largo e inmutable para `/_astro/` y las imágenes.
+Build estático (`pnpm build` → `dist/`) desplegado en Vercel. [vercel.json](vercel.json) añade `X-Frame-Options`, `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy` y cacheo largo e inmutable para `/_astro/` y las imágenes.
 
->  El `script-src` del CSP autoriza los scripts inline por **hash sha256**. Si editas el script de tema o el JSON-LD de `BaseLayout.astro`, el navegador los bloqueará en producción hasta que regeneres el hash correspondiente en `vercel.json`. La consola del navegador imprime el hash esperado en el mensaje de bloqueo.
+### Content Security Policy
+
+El CSP **no** está en `vercel.json`: lo genera Astro (`security.csp` en [astro.config.mjs](astro.config.mjs)) como un `<meta>` por página, calculando en cada build los hashes sha256 de los scripts y estilos inline. Es la única fuente de verdad — no dupliques la política en la cabecera, porque dos CSP se aplican como intersección y el más restrictivo bloquea.
+
+Un detalle que importa al tocar el `<head>`: Astro solo hashea automáticamente los `<script>` que empaqueta él. Los dos inline del `<head>` (el JSON-LD y el script anti-flash de tema) quedan fuera, así que su contenido vive en [head-inline.js](src/lib/head-inline.js) y **tanto `BaseLayout.astro` como `astro.config.mjs` lo importan de ahí**: uno lo renderiza, el otro lo hashea. Edítalo en ese módulo y el hash se actualiza solo; escríbelo a mano en el markup y el navegador lo bloqueará en producción.
+
+`frame-ancestors` no viaja en el `<meta>` — los navegadores lo ignoran ahí — así que esa protección la cubre `X-Frame-Options: DENY` en la cabecera.
 
 ## Licencia
 
