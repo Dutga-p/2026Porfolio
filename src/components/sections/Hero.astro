@@ -41,36 +41,3 @@ const t = useTranslations(lang);
     </div>
   </Container>
 </section>
-
-<script>
-  import { gsap } from 'gsap';
-
-  const hero = document.querySelector('.hero');
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  if (hero && !reduceMotion) {
-    // Entrance is JS-driven (gsap.from), not CSS: the markup renders fully
-    // visible by default, so a visitor without JS still sees everything —
-    // GSAP only sets the "from" state once it's actually running.
-    const ctas = hero.querySelectorAll('.hero-ctas > *');
-
-    gsap
-      .timeline({ defaults: { ease: 'power3.out', duration: 0.7 } })
-      .from('.hero-badge', { autoAlpha: 0, y: 10 })
-      .from('.hero-title', { autoAlpha: 0, y: 20 }, '-=0.5')
-      .from('.hero-description', { autoAlpha: 0, y: 14 }, '-=0.45')
-      .from(ctas, { autoAlpha: 0, y: 12, stagger: 0.08 }, '-=0.4');
-
-    // Subtle looping pulse on the availability dot — small, purposeful,
-    // and paused entirely under reduced motion rather than just skipped once.
-    gsap.to('.hero-badge-dot', {
-      scale: 1.6,
-      opacity: 0.4,
-      duration: 1.1,
-      repeat: -1,
-      yoyo: true,
-      ease: 'sine.inOut',
-      delay: 1.2,
-    });
-  }
-</script>
