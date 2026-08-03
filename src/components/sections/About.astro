@@ -17,14 +17,18 @@ const t = useTranslations(lang);
 
 <section id="about" class="py-24">
   <Container class="grid gap-12 lg:grid-cols-[320px_1fr] lg:items-center">
-    <div class="relative mx-auto w-full max-w-xs">
-      <div class="absolute -inset-4 -z-10 rounded-3xl bg-accent/10 blur-2xl" aria-hidden="true"></div>
+    <div class="relative mx-auto w-40 sm:w-48 lg:w-full lg:max-w-xs">
+      <div
+        class="absolute -inset-4 -z-10 rounded-full bg-accent/10 blur-2xl lg:rounded-3xl"
+        aria-hidden="true"
+      >
+      </div>
       <Image
         src={photo}
         alt="David"
         width={480}
         height={480}
-        class="aspect-square w-full rounded-2xl border border-border object-cover"
+        class="aspect-square w-full rounded-full border border-border object-cover lg:rounded-2xl"
       />
     </div>
 

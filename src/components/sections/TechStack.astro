@@ -28,89 +28,77 @@ const t = useTranslations(lang);
 
 // simple-icons has no AWS or React Native entry (Amazon/Meta restrict those
 // brand marks), so those two render as text-only badges instead of icon + text.
-const technologies = [
-  { name: 'Python', icon: python },
-  { name: 'React', icon: react },
-  { name: 'React Native', icon: null },
-  { name: 'Vue.js', icon: vuedotjs },
-  { name: 'TypeScript', icon: typescript },
-  { name: 'Node.js', icon: nodedotjs },
-  { name: 'Laravel', icon: laravel },
-  { name: 'Django', icon: django },
-  { name: 'Flask', icon: flask },
-  { name: 'Expo', icon: expo },
-  { name: 'PostgreSQL', icon: postgresql },
-  { name: 'MySQL', icon: mysql },
-  { name: 'Docker', icon: docker },
-  { name: 'Nginx', icon: nginx },
-  { name: 'AWS', icon: null },
-  { name: 'Linux', icon: linux },
-  { name: 'Git', icon: git },
+const categories = [
+  {
+    label: t.techStack.categories.frontend,
+    technologies: [
+      { name: 'React', icon: react },
+      { name: 'React Native', icon: null },
+      { name: 'Vue.js', icon: vuedotjs },
+      { name: 'TypeScript', icon: typescript },
+      { name: 'Expo', icon: expo },
+    ],
+  },
+  {
+    label: t.techStack.categories.backend,
+    technologies: [
+      { name: 'Python', icon: python },
+      { name: 'Node.js', icon: nodedotjs },
+      { name: 'Laravel', icon: laravel },
+      { name: 'Django', icon: django },
+      { name: 'Flask', icon: flask },
+    ],
+  },
+  {
+    label: t.techStack.categories.database,
+    technologies: [
+      { name: 'PostgreSQL', icon: postgresql },
+      { name: 'MySQL', icon: mysql },
+    ],
+  },
+  {
+    label: t.techStack.categories.devops,
+    technologies: [
+      { name: 'Docker', icon: docker },
+      { name: 'Nginx', icon: nginx },
+      { name: 'AWS', icon: null },
+      { name: 'Linux', icon: linux },
+      { name: 'Git', icon: git },
+    ],
+  },
 ];
 
 const withCurrentColor = (svg: string) => svg.replace('<svg ', '<svg fill="currentColor" ');
-
-// Duplicated so the marquee track can loop seamlessly at -50%; the second
-// half is marked aria-hidden so a screen reader doesn't announce every
-// technology twice.
-const items = [
-  ...technologies.map((tech) => ({ ...tech, hidden: false })),
-  ...technologies.map((tech) => ({ ...tech, hidden: true })),
-];
 ---
 
-<section aria-label={t.techStack.title} class="border-y border-border py-8">
-  <Container class="mb-6">
+<section aria-label={t.techStack.title} class="border-y border-border py-16">
+  <Container class="flex flex-col gap-10">
     <SectionHeading eyebrow={t.techStack.eyebrow} title={t.techStack.title} />
-  </Container>
 
-  <div class="marquee group overflow-hidden">
-    <ul class="marquee__track flex w-max items-center gap-4">
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
       {
-        items.map((tech) => (
-          <li
-            aria-hidden={tech.hidden ? 'true' : undefined}
-            class="flex items-center gap-2.5 rounded-full border border-border bg-surface px-4 py-2 text-sm font-medium whitespace-nowrap text-text-secondary"
-          >
-            {tech.icon && (
-              <span
-                class="h-4 w-4 shrink-0 text-text-muted [&>svg]:h-full [&>svg]:w-full"
-                set:html={withCurrentColor(tech.icon)}
-              />
-            )}
-            {tech.name}
-          </li>
+        categories.map((category) => (
+          <div class="flex flex-col gap-4 rounded-2xl border border-border bg-surface p-5">
+            <h3 class="text-xs font-semibold tracking-wide text-text-muted uppercase">
+              {category.label}
+            </h3>
+
+            <ul class="flex flex-wrap gap-2">
+              {category.technologies.map((tech) => (
+                <li class="flex items-center gap-2 rounded-full bg-bg px-3 py-1.5 text-sm font-medium whitespace-nowrap text-text-secondary">
+                  {tech.icon && (
+                    <span
+                      class="h-4 w-4 shrink-0 text-text-muted [&>svg]:h-full [&>svg]:w-full"
+                      set:html={withCurrentColor(tech.icon)}
+                    />
+                  )}
+                  {tech.name}
+                </li>
+              ))}
+            </ul>
+          </div>
         ))
       }
-    </ul>
-  </div>
+    </div>
+  </Container>
 </section>
-
-<style>
-  .marquee {
-    mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
-  }
-
-  .marquee__track {
-    animation: marquee 54s linear infinite;
-  }
-
-  .marquee:hover .marquee__track {
-    animation-play-state: paused;
-  }
-
-  @keyframes marquee {
-    from {
-      transform: translateX(0);
-    }
-    to {
-      transform: translateX(-50%);
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .marquee__track {
-      animation: none;
-    }
-  }
-</style>

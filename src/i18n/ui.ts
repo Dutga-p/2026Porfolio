@@ -29,6 +29,12 @@ export const ui = {
     techStack: {
       eyebrow: 'Stack',
       title: 'Tecnologías que uso',
+      categories: {
+        frontend: 'Frontend & Móvil',
+        backend: 'Backend',
+        database: 'Bases de datos',
+        devops: 'Infraestructura',
+      },
     },
     projects: {
       eyebrow: 'Proyectos',
@@ -112,6 +118,12 @@ export const ui = {
     techStack: {
       eyebrow: 'Stack',
       title: 'Technologies I use',
+      categories: {
+        frontend: 'Frontend & Mobile',
+        backend: 'Backend',
+        database: 'Databases',
+        devops: 'Infrastructure',
+      },
     },
     projects: {
       eyebrow: 'Projects',
