@@ -7,6 +7,8 @@ import nodedotjs from 'simple-icons/icons/nodedotjs.svg?raw';
 import laravel from 'simple-icons/icons/laravel.svg?raw';
 import django from 'simple-icons/icons/django.svg?raw';
 import flask from 'simple-icons/icons/flask.svg?raw';
+import astro from 'simple-icons/icons/astro.svg?raw';
+import nextdotjs from 'simple-icons/icons/nextdotjs.svg?raw';
 import expo from 'simple-icons/icons/expo.svg?raw';
 import postgresql from 'simple-icons/icons/postgresql.svg?raw';
 import mysql from 'simple-icons/icons/mysql.svg?raw';
@@ -29,12 +31,14 @@ const t = useTranslations(lang);
 // simple-icons has no AWS or React Native entry (Amazon/Meta restrict those
 // brand marks), so those two render as text-only badges instead of icon + text.
 const categories = [
-  {
+    {
     label: t.techStack.categories.frontend,
     technologies: [
       { name: 'React', icon: react },
+      { name: 'Next.js', icon: nextdotjs },
       { name: 'React Native', icon: null },
       { name: 'Vue.js', icon: vuedotjs },
+      { name: 'Astro', icon: astro },
       { name: 'TypeScript', icon: typescript },
       { name: 'Expo', icon: expo },
     ],
